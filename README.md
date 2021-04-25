@@ -37,6 +37,6 @@ An existing flaw in the framework does not authorize users when accessing the en
 2. http://localhost:8088/students/
 3. http://localhost:8088/students/1
 
-
+When these endpoints are accessed, an error message is returned, even after succesful authentication/authorization.  "detail": "Authentication credentials were not provided."
 
 
