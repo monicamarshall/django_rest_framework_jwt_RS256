@@ -1,6 +1,6 @@
 # django_rest_framework_jwt_RS256
 
-This is a demo project of the django-rest-framework-jwt by JPadilla. 
+This is a demo project of the django-rest-framework-jwt capabilities by JPadilla. 
 
 Documentation for django-rest-framework-jwt is available at:
 
