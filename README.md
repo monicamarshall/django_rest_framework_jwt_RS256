@@ -7,6 +7,8 @@ Documentation for django-rest-framework-jwt is available at:
 https://github.com/jpadilla/django-rest-framework-jwt
 https://github.com/jpadilla/django-rest-framework-jwt/issues/484
 https://jpadilla.github.io/django-rest-framework-jwt/
+https://www.techiediaries.com/django-rest-framework-jwt-tutorial/
+https://medium.com/@msum_t/jwt-auth-implemention-with-django-rest-framework-6e9d4b603c1c
 
 This library is unmaintained and is used by the newer framework djangorestframework-simplejwt at:
 
