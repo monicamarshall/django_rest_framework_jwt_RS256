@@ -19,6 +19,14 @@ The demo projects shows 3 basic RS256 jwt capabilities:
 2. Refresh the token ( using the access token obtained in step 1 ) The url for obtaining a token (server running at port 8088 ): http://localhost:8088/users/api-token-refresh/
 3. Verify token ( using the access token from step 1 or step 2 ) The url for obtaining a token (server running at port 8088 ): http://localhost:8088/users/api-token-verify/
 
+You can easily test if the endpoint is working by doing the following in your terminal, if you had a user created with the username admin and password password123.
+
+$ curl -X POST -d "username=admin&password=password123" http://localhost:8088/api-token-auth/
+Alternatively, you can use all the content types supported by the Django REST framework to obtain the auth token. For example:
+
+$ curl -X POST -H "Content-Type: application/json" -d '{"username":"admin","password":"password123"}' http://localhost:8088/api-token-auth/
+
+
 Prerequisite for the obtaining a token:
 The username and password for the user requesting a new token must already exist in the django Users database.  For this, run the 'python manage.py createsuperuser' command
 to create a user first.
@@ -38,5 +46,20 @@ An existing flaw in the framework does not authorize users when accessing the en
 3. http://localhost:8088/students/1
 
 When these endpoints are accessed, an error message is returned, even after succesful authentication/authorization.  "detail": "Authentication credentials were not provided."
+
+With curl, the http requests with the token in the Authorization header are susseccuful.  In order to access protected api urls you must include the Authorization: JWT <your_token> header.
+
+$ curl -H "Authorization: JWT <your_token>" http://localhost:8088/hello/
+
+$ curl -H "Authorization: JWT <your_token>" http://localhost:8088/students/
+
+$ curl -H "Authorization: JWT <your_token>" http://localhost:8088/students/1/
+
+If in settings.py you have overridden JWT_AUTH_HEADER_PREFIX = 'Bearer', then the api call with curl will be:
+
+$ curl -H "Authorization: Bearer <your_token>" http://localhost:8088/hello/
+
+
+
 
 
