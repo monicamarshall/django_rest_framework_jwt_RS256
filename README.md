@@ -23,18 +23,18 @@ The demo projects shows 3 basic RS256 jwt capabilities:
 
 You can easily test if the endpoint is working by doing the following in your terminal, if you had a user created with the username admin and password password123.
 
-$ curl -X POST -d "username=admin&password=password123" http://localhost:8088/api-token-auth/
+$ curl -X POST -d "username=admin&password=password123" http://localhost:8088/users/api-token-auth/
 Alternatively, you can use all the content types supported by the Django REST framework to obtain the auth token. For example:
 
-$ curl -X POST -H "Content-Type: application/json" -d '{"username":"admin","password":"password123"}' http://localhost:8088/api-token-auth/
+$ curl -X POST -H "Content-Type: application/json" -d '{"username":"admin","password":"password123"}' http://localhost:8088/users/api-token-auth/
 
 Pass in an existing token to the refresh endpoint as follows: {"token": EXISTING_TOKEN}. Note that only non-expired tokens will work. The JSON response looks the same as the normal obtain token endpoint {"token": NEW_TOKEN}.
 
-$ curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8088/api-token-refresh/
+$ curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8088/users/api-token-refresh/
 
 Passing a token to the verification endpoint will return a 200 response and the token if it is valid. Otherwise, it will return a 400 Bad Request as well as an error identifying why the token was invalid.
 
-$ curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8088/api-token-verify/
+$ curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8088/users/api-token-verify/
 
 Prerequisite for the obtaining a token:
 The username and password for the user requesting a new token must already exist in the django Users database.  For this, run the 'python manage.py createsuperuser' command
