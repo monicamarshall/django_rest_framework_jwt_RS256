@@ -104,9 +104,7 @@ https://jpadilla.github.io/django-rest-framework-jwt/
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
-    'JWT_AUTH_COOKIE': None,
-
-}
+    'JWT_AUTH_COOKIE': None, }
 
 This packages uses the JSON Web Token Python implementation, PyJWT and allows to modify some of its available options.
 
