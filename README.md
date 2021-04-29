@@ -17,7 +17,7 @@ The documentation for the maintained version is at:
 https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
 
 The demo projects shows 3 basic RS256 jwt capabilities:
-1. Obtain an access token and refresh token ( with valid username and password ).  The url for obtaining an access/refresh token (server running at port 8088 ): http://localhost:8088/users/api-token-auth/
+1. Obtain an access token.( with valid username and password ).  This url will return an access token and a refresh token to refresh the access token when it expires.  Remember that a new access token can be generated using the refresh token unless the refresh token has not expired.  The lifetime of a refresh token is typically longer than the lifetime of an access token.  If the refresh token is expired a new access token must be issued by submitting login credentials.  The url for obtaining an access/refresh token (server running at port 8088 ): http://localhost:8088/users/api-token-auth/
 2. Refresh access token ( using the refresh token obtained in step 1 ) The url for obtaining a new access token posting the refresh token (server running at port 8088 ): http://localhost:8088/users/api-token-refresh/
 3. Verify token ( using the access token from step 1 or step 2 ) The url for obtaining a token (server running at port 8088 ): http://localhost:8088/users/api-token-verify/
 
