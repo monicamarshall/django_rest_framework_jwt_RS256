@@ -56,7 +56,7 @@ An existing flaw in the framework does not authorize users when accessing the en
 
 When these endpoints are accessed, an error message is returned, even after succesful authentication/authorization.  "detail": "Authentication credentials were not provided."
 
-With curl, the http requests with the token in the Authorization header are susseccuful.  In order to access protected api urls you must include the Authorization: JWT <your_token> header.
+With curl, the http requests with the token in the Authorization header are susseccuful.  In order to access protected api urls you must include the Authorization: JWT <your_token> header.  JWT to prefix the authorization token is the default prefix.  The default prefix can be overriddent in settings.py with JWT_AUTH_HEADER_PREFIX = 'Bearer'.
 
 $ curl -H "Authorization: JWT <your_token>" http://localhost:8088/hello/
 
