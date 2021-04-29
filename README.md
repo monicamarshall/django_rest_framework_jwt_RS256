@@ -73,6 +73,7 @@ Read default AUTH settings in the documentation page for djangorestframework-jwt
 
 https://jpadilla.github.io/django-rest-framework-jwt/
 
+
 JWT_AUTH = {
     'JWT_ENCODE_HANDLER':
     'rest_framework_jwt.utils.jwt_encode_handler',
@@ -108,6 +109,7 @@ JWT_AUTH = {
     'JWT_AUTH_COOKIE': None,
 
 }
+
 This packages uses the JSON Web Token Python implementation, PyJWT and allows to modify some of its available options.
 
 
