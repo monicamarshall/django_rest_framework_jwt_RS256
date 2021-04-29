@@ -21,7 +21,7 @@ The demo projects shows 3 basic RS256 jwt capabilities:
 2. Refresh access token ( using the refresh token obtained in step 1 ) The url for obtaining a new access token posting the refresh token (server running at port 8088 ): http://localhost:8088/users/api-token-refresh/
 3. Verify token ( using the access token from step 1 or step 2 ) The url for obtaining a token (server running at port 8088 ): http://localhost:8088/users/api-token-verify/
 
-You can easily test if the endpoint is working by doing the following in your terminal, if you had a user created with the username admin and password password123.
+You can easily test if the endpoint returns a response by submitting the following commands in your terminal.  Remember that you must have a user created with the username admin and password password123.  This is done by issuing the command:  python manage.py createsuperuser in the project directory where manage.py is located.  Follow the prompts and add a superuser with name admin and password password123.
 
 $ curl -X POST -d "username=admin&password=password123" http://localhost:8088/users/api-token-auth/
 Alternatively, you can use all the content types supported by the Django REST framework to obtain the auth token. For example:
