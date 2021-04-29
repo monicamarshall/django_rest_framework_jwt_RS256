@@ -21,7 +21,8 @@ The demo projects shows 3 basic RS256 jwt capabilities:
 2. Refresh access token ( using the refresh token obtained in step 1 ) The url for obtaining a new access token posting the refresh token (server running at port 8088 ): http://localhost:8088/users/api-token-refresh/
 3. Verify token ( using the access token from step 1 or step 2 ) The url for obtaining a token (server running at port 8088 ): http://localhost:8088/users/api-token-verify/
 
-You can easily test if the endpoint returns a response by submitting the following commands in your terminal.  Remember that you must have a user created with the username admin and password password123.  This is done by issuing the command:  python manage.py createsuperuser in the project directory where manage.py is located.  Follow the prompts and add a superuser with name admin and password password123.
+You can easily test if the endpoint returns a response by submitting the following commands in your terminal.  Remember that you must have a user created with the username admin and password password123.  
+This is done by issuing the command:  python manage.py createsuperuser in the project directory where manage.py is located.  Follow the prompts and add a superuser with name admin and password password123.
 
 $ curl -X POST -d "username=admin&password=password123" http://localhost:8088/users/api-token-auth/
 Alternatively, you can use all the content types supported by the Django REST framework to obtain the auth token. For example:
@@ -48,7 +49,7 @@ The project also offers 2 services:
 Current unresolved capabilities:
 The framework will authorize access to the hello and student service in curl commands when the RS256 token is set in the Authorization Bearer header of the request.
 The framework DOES NOT authorize access to the hello and student services when when requests for the hello and students resources are submitted via browser.  
-An existing flaw in the framework does not authorize users when accessing the endpoints via URL in a web page:
+The framework WILL NOT automatically authorize users when accessing the endpoints via URL in a web page:
 
 1. http://localhost:8088/hello/
 2. http://localhost:8088/students/
@@ -56,7 +57,7 @@ An existing flaw in the framework does not authorize users when accessing the en
 
 When these endpoints are accessed, an error message is returned, even after succesful authentication/authorization.  "detail": "Authentication credentials were not provided."
 
-With curl, the http requests with the token in the Authorization header are susseccuful.  In order to access protected api urls you must include the Authorization: JWT <your_token> header.  JWT to prefix the authorization token is the default prefix.  The default prefix can be overriddent in settings.py with JWT_AUTH_HEADER_PREFIX = 'Bearer'.
+With curl, the http requests with the token in the Authorization header are susseccuful.  In order to access protected api urls you must include the Authorization: JWT <your_token> header.  JWT to prefix the authorization token is the default prefix.  The default prefix can be overridden in settings.py with JWT_AUTH_HEADER_PREFIX = 'Bearer'.
 
 $ curl -H "Authorization: JWT <your_token>" http://localhost:8088/hello/
 
@@ -67,6 +68,48 @@ $ curl -H "Authorization: JWT <your_token>" http://localhost:8088/students/1/
 If in settings.py you have overridden JWT_AUTH_HEADER_PREFIX = 'Bearer', then the api call with curl will be:
 
 $ curl -H "Authorization: Bearer <your_token>" http://localhost:8088/hello/
+
+Read default AUTH settings in the documentation page for djangorestframework-jwt at:
+
+https://jpadilla.github.io/django-rest-framework-jwt/
+
+JWT_AUTH = {
+    'JWT_ENCODE_HANDLER':
+    'rest_framework_jwt.utils.jwt_encode_handler',
+
+    'JWT_DECODE_HANDLER':
+    'rest_framework_jwt.utils.jwt_decode_handler',
+
+    'JWT_PAYLOAD_HANDLER':
+    'rest_framework_jwt.utils.jwt_payload_handler',
+
+    'JWT_PAYLOAD_GET_USER_ID_HANDLER':
+    'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
+
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'rest_framework_jwt.utils.jwt_response_payload_handler',
+
+    'JWT_SECRET_KEY': settings.SECRET_KEY,
+    'JWT_GET_USER_SECRET_KEY': None,
+    'JWT_PUBLIC_KEY': None,
+    'JWT_PRIVATE_KEY': None,
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_LEEWAY': 0,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
+    'JWT_AUDIENCE': None,
+    'JWT_ISSUER': None,
+
+    'JWT_ALLOW_REFRESH': False,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+    'JWT_AUTH_COOKIE': None,
+
+}
+This packages uses the JSON Web Token Python implementation, PyJWT and allows to modify some of its available options.
+
 
 
 
